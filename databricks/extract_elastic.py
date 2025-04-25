@@ -1,8 +1,7 @@
-# Script PySpark para extrair logs do Elasticsearch
+# Extrai dados do Elasticsearch usando PySpark
 
 from pyspark.sql import SparkSession
 
-# Inicializa a sessão Spark
 spark = SparkSession.builder \
     .appName("ExtractFromElasticsearch") \
     .config("spark.es.nodes", "localhost") \
@@ -10,13 +9,9 @@ spark = SparkSession.builder \
     .config("spark.es.nodes.wan.only", "true") \
     .getOrCreate()
 
-# Lê dados do Elasticsearch (índice de exemplo: logs-api)
-df = spark.read.format("org.elasticsearch.spark.sql") \
-    .load("logs-api/_doc")
-
-# Exibe dados
+# Lê o índice logs-api
+df = spark.read.format("org.elasticsearch.spark.sql").load("logs-api/_doc")
 df.show(truncate=False)
 
-# Salva localmente para simular enriquecimento
+# Salva temporariamente os dados
 df.write.mode("overwrite").json("dbfs:/tmp/logs_raw")
-

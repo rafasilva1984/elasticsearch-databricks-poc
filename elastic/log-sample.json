@@ -1,1 +1,6 @@
-[{"timestamp": "2025-04-01T10:00:00Z", "level": "ERROR", "message": "Timeout connecting to service", "service": "payment-api"}]
+{"index":{}}
+{"timestamp":"2025-04-01T10:00:00Z","level":"ERROR","message":"Timeout connecting to service","service":"payment-api"}
+{"index":{}}
+{"timestamp":"2025-04-01T10:01:00Z","level":"ERROR","message":"Null pointer exception on controller","service":"user-api"}
+{"index":{}}
+{"timestamp":"2025-04-01T10:02:00Z","level":"WARN","message":"Connection refused to cache","service":"cache-api"}

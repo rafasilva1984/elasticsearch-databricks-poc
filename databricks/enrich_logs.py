@@ -1,14 +1,14 @@
-# Script PySpark para enriquecer logs com regras simples ou ML
+# Enriquecimento dos logs com regras simples
+
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import when, col
 
-# Cria a sessão
 spark = SparkSession.builder.appName("EnrichLogs").getOrCreate()
 
-# Lê os logs extraídos
+# Lê logs brutos
 df = spark.read.json("dbfs:/tmp/logs_raw")
 
-# Enriquecimento: classificação simples por tipo de erro
+# Classificação por tipo de erro
 df_enriched = df.withColumn(
     "classificacao",
     when(col("message").contains("timeout"), "TimeoutError")
@@ -17,9 +17,5 @@ df_enriched = df.withColumn(
     .otherwise("Outros")
 )
 
-# Exibe resultados
 df_enriched.show(truncate=False)
-
-# Salva como CSV de exemplo
 df_enriched.write.mode("overwrite").csv("dbfs:/tmp/logs_enriched", header=True)
-

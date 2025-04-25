@@ -1,4 +1,4 @@
-# Script para retornar os dados enriquecidos ao Elasticsearch
+# Retorna dados enriquecidos ao Elasticsearch
 
 from pyspark.sql import SparkSession
 
@@ -12,9 +12,8 @@ spark = SparkSession.builder \
 # Lê os dados enriquecidos
 df = spark.read.csv("dbfs:/tmp/logs_enriched", header=True)
 
-# Escreve no Elasticsearch em um índice novo
+# Escreve no índice logs-enriched
 df.write.format("org.elasticsearch.spark.sql") \
     .option("es.resource", "logs-enriched/_doc") \
     .mode("overwrite") \
     .save()
-
