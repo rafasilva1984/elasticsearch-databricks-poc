@@ -113,16 +113,6 @@ elasticsearch-databricks-poc/
 =======
 ```
 
----
-
-## 🧠 Possibilidades futuras
-
-- Aplicar MLflow para classificação automatizada
-- Salvar em Delta Lake
-- Conectar com Kafka, APIs externas e Data Lakes
-
----
-
 ## 📎 Links
 
 - GitHub: [rafasilva1984](https://github.com/rafasilva1984)
