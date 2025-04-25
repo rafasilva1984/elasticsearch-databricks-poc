@@ -27,6 +27,8 @@ Unir a velocidade de busca do Elasticsearch com o poder de processamento do Data
 ### 🔁 Etapas
 
  1. Criar o índice no Elasticsearch
+=======
+#### 1. Criar o índice no Elasticsearch
 Execute via Kibana Dev Tools ou API:
 
 ```json
@@ -61,6 +63,39 @@ Crie index pattern: logs-enriched
 
 Explore os campos, incluindo classificacao
 
+=======
+```
+
+---
+
+#### 2. Ingerir os logs de exemplo
+
+```bash
+curl -X POST "http://localhost:9200/logs-api/_bulk" -H 'Content-Type: application/json' --data-binary @elastic/log-sample.json
+```
+
+---
+
+#### 3. No Databricks, execute os scripts na seguinte ordem:
+
+(a) `extract_elastic.py` – extrai os dados e salva em `/tmp/logs_raw`  
+(b) `enrich_logs.py` – aplica regras e salva como `/tmp/logs_enriched`  
+(c) `return_to_elastic.py` – envia os dados tratados ao índice `logs-enriched`
+
+> Alternativamente, execute o notebook `LogAnalysisDatabricks.ipynb` que contém todas as etapas agrupadas.
+
+---
+
+#### 4. Visualize os dados enriquecidos no Kibana
+
+- Crie index pattern: `logs-enriched`
+- Explore os campos, incluindo `classificacao`
+
+---
+
+## 📦 Estrutura do Projeto
+
+```
 elasticsearch-databricks-poc/
 ├── elastic/
 │   ├── log-sample.json
@@ -75,3 +110,25 @@ elasticsearch-databricks-poc/
 └── assets/architecture-diagram.png
 
 
+=======
+```
+
+---
+
+## 🧠 Possibilidades futuras
+
+- Aplicar MLflow para classificação automatizada
+- Salvar em Delta Lake
+- Conectar com Kafka, APIs externas e Data Lakes
+
+---
+
+## 📎 Links
+
+- GitHub: [rafasilva1984](https://github.com/rafasilva1984)
+- LinkedIn: [Rafael Silva](https://linkedin.com/in/rafael-silva-leader-coordenador)
+- Medium: [rafaelldasilva](https://medium.com/@rafaelldasilva)
+
+---
+
+#Elasticsearch #Databricks #Observabilidade #DataOps #BigData #MachineLearning
