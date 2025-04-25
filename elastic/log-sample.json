@@ -1,0 +1,1 @@
+[{"timestamp": "2025-04-01T10:00:00Z", "level": "ERROR", "message": "Timeout connecting to service", "service": "payment-api"}]
